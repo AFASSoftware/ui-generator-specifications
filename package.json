@@ -10,6 +10,7 @@
     "fb-watchman": "^2.0.0",
     "fs-readdir-recursive": "^1.0.0",
     "json-beautify": "^1.0.1",
+    "mkdirp": "^0.5.1",
     "watchman": "^0.1.8"
   },
   "scripts": {

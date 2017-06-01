@@ -93,20 +93,28 @@ function make_subscription(client, watch, relative_path) {
 const read = require('fs-readdir-recursive')
 const beautify = require('json-beautify')
 const fs = require('fs')
+const mkdirp = require('mkdirp')
+
 function parseSource(resp) {
+
   // PARSE ALL FUNCTIONALITY SPECIFIATIONS
   let files = read(__dirname+'/source/functionality').filter((file) => {
-    return (/specification\.js$/).test(file)
+    if ((/(roles|parts)\/.*\.js$/).test(file)) {
+      mkdirp(__dirname+'/parsed/'+file.replace(/[^\/]+$/,''))
+      return true
+    }
   })
 
   files.forEach((file) => {
     let sourcePath = './source/functionality/'+file
-    let sourceDir = file.split('/')[0].toLowerCase()
-    let parsePath = './parsed/'+sourceDir+'.js'
+    let parts = file.split('/')
+    let parsedName = parts[0]+'/'+parts[1]
+    let parsePath = __dirname+'/parsed/'+file
 
     let specification = require(sourcePath)
     delete require.cache[require.resolve(sourcePath)]
     let specificationString = beautify(specification, null, 2)
+
     fs.writeFile(parsePath, specificationString, (err) => {
       if (err) throw err
       console.log('Specification parsed', parsePath)
