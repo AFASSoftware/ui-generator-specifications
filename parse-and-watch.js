@@ -96,7 +96,7 @@ const fs = require('fs')
 function parseSource(resp) {
   // PARSE ALL FUNCTIONALITY SPECIFIATIONS
   let files = read(__dirname+'/source/functionality').filter((file) => {
-    return (/Test\/specification\.js$/).test(file)
+    return (/specification\.js$/).test(file)
   })
 
   files.forEach((file) => {
@@ -105,8 +105,10 @@ function parseSource(resp) {
     let parsePath = './parsed/'+sourceDir+'.js'
 
     let specification = require(sourcePath)
+    delete require.cache[require.resolve(sourcePath)]
     let specificationString = beautify(specification, null, 2)
-    fs.writeFile(parsePath, specificationString, () => {
+    fs.writeFile(parsePath, specificationString, (err) => {
+      if (err) throw err
       console.log('Specification parsed', parsePath)
     })
   })
