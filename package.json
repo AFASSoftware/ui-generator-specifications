@@ -1,0 +1,28 @@
+{
+  "name": "next-ui-generator-specification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "parse-and-watch.js",
+  "dependencies": {
+    "watchman": "^0.1.8"
+  },
+  "devDependencies": {
+    "fb-watchman": "^2.0.0",
+    "fs-readdir-recursive": "^1.0.0",
+    "json-beautify": "^1.0.1",
+    "watchman": "^0.1.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AFASSoftware/ui-generator-specifications.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AFASSoftware/ui-generator-specifications/issues"
+  },
+  "homepage": "https://github.com/AFASSoftware/ui-generator-specifications#readme"
+}
