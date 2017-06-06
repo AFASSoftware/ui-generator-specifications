@@ -1,15 +1,17 @@
 const AANBOD = require('./cursus-aanbod.js')
+const SESSIE = require('./cursus-sessie.js')
 const DOCENT = require('./cursus-docent.js')
 const RUIMTE = require('./../../../models/ruimte.js')
+const FACTUURREGEL = require('./../../../models/factuurregel.js')
 
 module.exports = {
-  type: 'gebeurtenis',
   title: 'Ingeplande cursus',
   titlePlural: 'Ingeplande cursussen',
   sampleTitle: 'HRM Basis - 20 juni',
   data: [
     {
-      reference: AANBOD
+      relation: AANBOD,
+      relationType: 'single'
     },
     {
       title: 'Datum',
@@ -17,7 +19,8 @@ module.exports = {
       sort: true
     },
     {
-      reference: DOCENT
+      relation: DOCENT,
+      relationType: 'single'
     },
     {
       title: 'Bezetting',
@@ -32,7 +35,16 @@ module.exports = {
       sampleData: 'date'
     },
     {
-      reference: RUIMTE
+      relation: RUIMTE,
+      relationType: 'single'
+    },
+    {
+      relation: SESSIE,
+      relationType: 'many'
+    },
+    {
+      relation: FACTUURREGEL,
+      relationType: 'many'
     },
     {
       title: 'Beschrijving',

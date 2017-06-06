@@ -23,7 +23,7 @@ module.exports = {
       sampleData: ['x..y', { min: 5, maxmin: 10, max: 25, minmax: 15, seperator: '-' }]
     },
     {
-      reference: RUIMTE
+      relation: RUIMTE
     },
     {
       title: 'Beschrijving',

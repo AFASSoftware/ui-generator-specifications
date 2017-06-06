@@ -28,7 +28,7 @@ module.exports = {
     },
     {
       title: 'Klant',
-      reference: ORGANISATIE
+      relation: ORGANISATIE
     },
     {
       title: 'Contactpersoon'

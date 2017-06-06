@@ -17,221 +17,194 @@ module.exports = {
   ],
   pages: [
     {
-      type: 'portal', // Page.Portal
-      title: 'Cursussen',
+      type: 'Page.Portal',
+      model: { title: 'Cursussen' },
       pages: [
         {
-          type: 'collection', // Page.Collection.Table
+          type: 'Page.Collection.Table',
           model: AANBOD,
-          title: AANBOD.titlePlural,
-          data: AANBOD.data,
           exclude: ['Beschrijving'],
-          detailPage: {
-            type: 'detail',
-            model: AANBOD,
-            title: AANBOD.sampleTitle,
-            tabs: [
-              {
-                type: 'detail',
-                title: 'Algemeen'
-              },
-              {
-                type: 'collection',
-                model: SESSIE,
-                title: SESSIE.titlePlural,
-                data: SESSIE.data,
-                exclude: ['Omschrijving'],
-                count: 2,
-                detailPage: {
-                  type: 'detail',
+          pages: [
+            {
+              type: 'Page.Detail',
+              model: AANBOD
+            },
+            {
+              type: 'Page.Detail.Collection',
+              model: AANBOD,
+              detail: {
+                collection: {
                   model: SESSIE,
-                  title: SESSIE.sampleTitle,
-                  data: SESSIE.data,
-                  tabs: [
-                    {
-                      type: 'detail',
-                      title: 'Algemeen'
-                    }
-                  ]
+                  count: 2,
+                  exclude: ['Omschrijving']
                 }
               },
-              {
-                type: 'collection',
-                model: INGEPLAND,
-                title: INGEPLAND.titlePlural,
-                data: INGEPLAND.data,
-                exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
-                count: 7,
-                switcher: ['Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie']
-              },
-              {
-                type: 'collection',
-                model: FACTUURREGEL,
-                title: FACTUURREGEL.titlePlural,
-                data: FACTUURREGEL.data,
-                exclude: ['Omschrijving']
+              pages: [
+                {
+                  type: 'Page.Detail',
+                  model: SESSIE
+                }
+              ]
+            },
+            {
+              type: 'Page.Detail.Collection',
+              model: AANBOD,
+              detail: {
+                collection: {
+                  model: INGEPLAND,
+                  exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
+                  count: 7,
+                  switcher: ['Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie']
+                }
               }
-            ]
-          }
+            },
+            {
+              type: 'Page.Detail.Collection',
+              model: AANBOD,
+              detail: {
+                collection: {
+                  model: FACTUURREGEL,
+                  exclude: ['Omschrijving'],
+                  count: 7
+                }
+              }
+            }
+          ]
         },
         {
-          type: 'collection',
+          type: 'Page.Collection.Table',
           model: INGEPLAND,
-          title: INGEPLAND.titlePlural,
-          data: INGEPLAND.data,
-          exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
-          switcher: ['Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie'],
-          detailPage: {
-            title: INGEPLAND.sampleTitle,
-            tabs: [
-              {
-                type: 'detail',
-                title: 'Algemeen'
-              },
-              {
-                type: 'collection',
-                model: CURSIST,
-                title: CURSIST.titlePlural,
-                data: CURSIST.data,
+          collection: {
+            exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
+            switcher: ['Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie'],
+          },
+          pages: [
+            {
+              type: 'Page.Detail',
+              model: INGEPLAND
+            },
+            {
+              type: 'Page.Detail.Collection.Table',
+              model: CURSIST,
+              collection: {
                 count: 11,
                 exclude: ['Omschrijving'],
                 actions: [
                   ['Inschrijven', 'arrowRight', 'primary'],
                   ['Meer', 'threeHorizontalDots'],
                 ]
-              },
-              {
-                type: 'collection',
-                model: SESSIE,
-                title: SESSIE.titlePlural,
-                data: SESSIE.data,
+              }
+            },
+            {
+              type: 'Page.Detail.Collection.Table',
+              model: SESSIE,
+              collection: {
                 count: 3,
                 exclude: ['Omschrijving'],
                 actions: []
-              },
-              {
-                type: 'collection',
-                model: FACTUURREGEL,
-                title: FACTUURREGEL.titlePlural,
-                data: FACTUURREGEL.data,
+              }
+            },
+            {
+              type: 'Page.Detail.Collection.Table',
+              model: FACTUURREGEL,
+              collection: {
                 exclude: ['Omschrijving'],
                 count: 8,
                 actions: []
               }
-            ]
-          },
+            }
+          ]
         },
         {
-          type: 'collection',
+          type: 'Page.Collection',
           model: DOCENT,
-          title: DOCENT.titlePlural,
-          data: DOCENT.data,
-          exclude: ['Docent'],
-          detailPage: {
-            title: DOCENT.sampleTitle,
-            tabs: [
-              {
-                type: 'detail',
-                title: 'Algemeen'
-              },
-              {
-                type: 'collection',
-                title: 'Gegeven cursussen',
-                data: INGEPLAND.data,
+          collection: {
+            exclude: ['Docent']
+          },
+          pages: [
+            {
+              type: 'Page.Detail',
+              model: DOCENT
+            },
+            {
+              type: 'Page.Detail.Collection.Table',
+              model: DOCENT,
+              title: 'Gegeven cursussen',
+              collection: {
+                model: INGEPLAND,
                 exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
                 count: 8,
                 actions: []
               }
-            ]
-          }
+            }
+          ]
         },
         {
-          type: 'collection',
+          type: 'Page.Collection',
           model: CURSIST,
-          title: CURSIST.titlePlural,
-          data: CURSIST.data,
-          detailPage: {
-            title: CURSIST.sampleTitle,
-            tabs: [
-              {
-                type: 'detail',
-                title: 'Algemeen'
-              },
-              {
-                type: 'collection',
+          pages: [
+            {
+              type: 'Page.Detail',
+              model: CURSIST
+            },
+            {
+              type: 'Page.Detail.Collection.Table',
+              model: CURSIST,
+              title: 'Gevolgde Cursussen',
+              collection: {
                 model: INGEPLAND,
-                title: 'Gevolgde Cursussen',
                 data: INGEPLAND.data,
                 exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
                 count: 3,
                 actions: []
               }
-            ]
-          }
+            }
+          ]
         }
       ]
     },
     {
-      type: 'portal',
-      title: 'Financieel',
+      type: 'Page.Portal',
+      model: { title: 'Financieel' },
       pages: [
         {
-          type: 'collection',
+          type: 'Page.Collection',
           model: FACTUURREGEL,
-          title: FACTUURREGEL.titlePlural,
-          data: FACTUURREGEL.data,
-          exclude: ['Omschrijving'],
-          detailPage: {
-            title: FACTUURREGEL.sampleTitle,
-            tabs: [
-              {
-                type: 'detail',
-                title: 'Algemeen'
-              }
-            ]
-          }
+          collection: {
+            exclude: ['Omschrijving']
+          },
+          pages: [
+            {
+              type: 'Page.Detail',
+              model: FACTUURREGEL
+            }
+          ]
         },
         {
-          type: 'collection',
+          type: 'Page.Collection',
           model: FACTUUR,
-          title: FACTUUR.titlePlural,
-          data: FACTUUR.data,
-          detailPage: {
-            title: FACTUUR.sampleTitle,
-            tabs: [
-              {
-                type: 'detail',
-                title: 'Algemeen'
-              }
-            ]
-          }
+          pages: [
+            {
+              type: 'Page.Detail',
+              model: FACTUUR
+            }
+          ]
         }
       ]
     },
     {
-      type: 'portal',
-      title: 'Functionaliteit',
+      type: 'Page.Portal',
+      model: { title: 'Functionaliteit' },
       pages: [
         {
-          type: 'collection',
+          type: 'Page.Collection',
           model: RUIMTE,
-          title: RUIMTE.titlePlural,
-          data: RUIMTE.data,
-          // include: [],
-          detailPage: {
-            type: 'detail',
-            model: RUIMTE,
-            title: RUIMTE.sampleTitle,
-            data: RUIMTE.data,
-            tabs: [
-              {
-                type: 'detail',
-                title: 'Algemeen',
-                data: RUIMTE.data,
-                model: RUIMTE
-              }
-            ]
-          }
+          pages: [
+            {
+              type: 'Page.Detail',
+              model: RUIMTE
+            }
+          ]
         }
       ]
     }

@@ -1,5 +1,3 @@
-const DOCENT = require('./cursus-docent.js')
-const RUIMTE = require('./../../../models/ruimte.js')
 
 module.exports = {
   title: 'Sessie',
@@ -17,12 +15,6 @@ module.exports = {
     {
       title: 'Eintijd',
       sampleData: ['time', { min: 8, max: 18 }]
-    },
-    {
-      relation: DOCENT
-    },
-    {
-      relation: RUIMTE
     },
     {
       title: 'Omschrijving',

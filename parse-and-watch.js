@@ -113,6 +113,7 @@ function parseSource(resp) {
 
     let specification = require(sourcePath)
     delete require.cache[require.resolve(sourcePath)]
+    delete require.cache[require.resolve(parsePath)]
     let specificationString = beautify(specification, null, 2)
 
     fs.writeFile(parsePath, specificationString, (err) => {

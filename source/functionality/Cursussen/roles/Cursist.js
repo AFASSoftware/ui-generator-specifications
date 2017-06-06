@@ -1,3 +1,6 @@
+// CLEAR MODULE CACHE
+require('require-reload')(require).emptyCache()
+
 // IMPORT GLOBAL MODELS
 const FACTUURREGEL = require('./../../../models/factuurregel.js')
 const FACTUUR = require('./../../../models/factuur.js')
@@ -13,83 +16,83 @@ const INGEPLAND = require('./../models/cursus-ingepland.js')
 module.exports = {
   sizes: [
     [1024, 700],
-    [375, 667]
+    // [375, 667]
   ],
   pages: [
     {
-      type: 'portal', // Page.Portal
-      title: 'Cursussen',
+      type: 'Page.Portal',
+      model: { title: 'Cursussen' },
       pages: [
         {
-          type: 'collection', // Page.Collection.Table
+          type: 'Page.Collection.Table',
           model: INGEPLAND,
-          title: INGEPLAND.titlePlural,
-          data: INGEPLAND.data,
-          exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
-          actions: [],
-          detailPage: {
-            type: 'detail',
-            title: INGEPLAND.sampleTitle,
-            actions: [
-              ['Schrijf je in', 'arrowRight', 'primary']
-            ],
-            tabs: [
-              {
-                type: 'detail',
-                title: 'Algemeen',
+          collection: {
+            exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
+            actions: []
+          },
+          pages: [
+            {
+              type: 'Page.Detail',
+              model: INGEPLAND,
+              detail: {
+                actions: [
+                  ['Schrijf je in', 'arrowRight', 'primary']
+                ],
                 exclude: ['Beschrijving', 'Bezetting', 'Opening inschrijving', 'Sluiting inschrijving']
-              },
-              {
-                type: 'collection',
-                model: SESSIE,
-                title: SESSIE.titlePlural,
-                data: SESSIE.data,
-                exclude: ['Omschrijving'],
-                count: 2,
-                actions: [],
-                detailPage: {
-                  type: 'detail',
-                  title: SESSIE.sampleTitle,
-                  actions: [],
-                  tabs: [
-                    {
-                      type: 'detail',
-                      title: 'Algemeen'
-                    }
-                  ]
-                }
               }
-            ]
-          }
+            },
+            {
+              type: 'Page.Detail.Collection.Table',
+              model: INGEPLAND,
+              detail: {
+                collection: {
+                  model: SESSIE,
+                  exclude: ['Omschrijving'],
+                  count: 2,
+                  actions: []
+                }
+              },
+              pages: [
+                {
+                  type: 'Page.Detail',
+                  model: SESSIE,
+                  detail: {
+                    exclude: ['Omschrijving'],
+                    actions: [],
+                    count: 2
+                  }
+                }
+              ]
+            }
+          ]
         },
       ]
     },
     {
-      type: 'portal',
-      title: '',
+      type: 'Page.Portal',
+      model: { title: '_' },
       pages: [
         {
-          type: 'collection',
+          type: 'Page.Collection',
           model: CURSIST,
-          title: CURSIST.titlePlural,
-          data: CURSIST.data,
-          detailPage: {
-            type: 'detail',
-            title: CURSIST.sampleTitle,
-            tabs: [
-              {
-                type: 'detail',
-                title: 'Algemeen'
-              },
-              {
-                type: 'collection',
-                title: 'Gevolgde Cursussen',
-                data: INGEPLAND.data,
-                exclude: ['Beschrijving', 'Bezetting', 'Opening inschrijving', 'Sluiting inschrijving'],
-                count: 4
+          pages: [
+            {
+              type: 'Page.Detail',
+              model: CURSIST
+            },
+            {
+              type: 'Page.Detail.Collection.Table',
+              model: CURSIST,
+              title: 'Gevolgde Cursussen',
+              detail: {
+                collection: {
+                  model: INGEPLAND,
+                  exclude: ['Beschrijving', 'Bezetting', 'Opening inschrijving', 'Sluiting inschrijving'],
+                  count: 4
+                }
               }
-            ]
-          }
+            }
+          ]
         }
       ]
     }

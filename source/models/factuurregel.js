@@ -18,7 +18,7 @@ module.exports = {
       sampleData: 'date'
     },
     {
-      reference: ORGANISATIE
+      relation: ORGANISATIE
     },
     {
       // reference: persoon()
