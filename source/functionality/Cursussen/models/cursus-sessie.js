@@ -19,10 +19,12 @@ module.exports = {
       sampleData: ['time', { min: 8, max: 18 }]
     },
     {
-      relation: DOCENT
+      relation: DOCENT,
+      relationType: 'single'
     },
     {
-      relation: RUIMTE
+      relation: RUIMTE,
+      relationType: 'single'
     },
     {
       title: 'Omschrijving',

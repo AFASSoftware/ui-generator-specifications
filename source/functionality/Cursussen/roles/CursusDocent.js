@@ -39,9 +39,10 @@ module.exports = {
             },
             {
               type: 'Page.Detail.Collection',
-              model: CURSIST,
+              model: INGEPLAND,
               detail: {
                 collection: {
+                  model: CURSIST,
                   count: 11,
                   exclude: ['Omschrijving'],
                   actions: []
@@ -50,9 +51,10 @@ module.exports = {
             },
             {
               type: 'Page.Detail.Collection',
-              model: SESSIE,
+              model: INGEPLAND,
               detail: {
                 collection: {
+                  model: SESSIE,
                   count: 3,
                   exclude: ['Omschrijving'],
                   actions: []
@@ -75,9 +77,10 @@ module.exports = {
             },
             {
               type: 'Page.Detail.Collection',
-              model: SESSIE,
+              model: AANBOD,
               detail: {
                 collection: {
+                  model: SESSIE,
                   exclude: ['Omschrijving'],
                   count: 2,
                   actions: []
@@ -91,20 +94,21 @@ module.exports = {
                     exclude: ['Docent'],
                     actions: []
                   }
-                },
-                {
-                  type: 'Page.Detail.Collection.Table',
-                  model: INGEPLAND,
-                  detail: {
-                    collection: {
-                      count: 7,
-                      exclude: ['Beschrijving'],
-                      switcher: ['Mijn ingeplande cursussen', 'Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie'],
-                      actions: []
-                    }
-                  }
                 }
               ]
+            },
+            {
+              type: 'Page.Detail.Collection.Table',
+              model: AANBOD,
+              detail: {
+                collection: {
+                  model: INGEPLAND,
+                  count: 7,
+                  exclude: ['Beschrijving'],
+                  switcher: ['Mijn ingeplande cursussen', 'Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie'],
+                  actions: []
+                }
+              }
             }
           ]
         },
@@ -124,10 +128,11 @@ module.exports = {
             },
             {
               type: 'Page.Detail.Collection.Table',
-              model: INGEPLAND,
+              model: DOCENT,
               title: 'Gegeven cursussen',
               detail: {
                 collection: {
+                  model: INGEPLAND,
                   exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving', 'Docent', 'Bezetting'],
                   count: 8,
                   actions: []
@@ -152,10 +157,11 @@ module.exports = {
             },
             {
               type: 'Page.Detail.Collection.Table',
-              model: INGEPLAND,
+              model: CURSIST,
               title: 'Gevolgde cursussen',
               detail: {
                 collection: {
+                  model: INGEPLAND,
                   exclude: ['Beschrijving'],
                   count: 3,
                   actions: []

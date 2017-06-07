@@ -1,3 +1,6 @@
+// CLEAR MODULE CACHE
+require('require-reload')(require).emptyCache()
+
 // IMPORT GLOBAL MODELS
 const FACTUURREGEL = require('./../../../models/factuurregel.js')
 const FACTUUR = require('./../../../models/factuur.js')
@@ -23,7 +26,9 @@ module.exports = {
         {
           type: 'Page.Collection.Table',
           model: AANBOD,
-          exclude: ['Beschrijving'],
+          collection: {
+            exclude: ['Beschrijving'],
+          },
           pages: [
             {
               type: 'Page.Detail',
@@ -85,32 +90,41 @@ module.exports = {
             },
             {
               type: 'Page.Detail.Collection.Table',
-              model: CURSIST,
-              collection: {
-                count: 11,
-                exclude: ['Omschrijving'],
-                actions: [
-                  ['Inschrijven', 'arrowRight', 'primary'],
-                  ['Meer', 'threeHorizontalDots'],
-                ]
+              model: INGEPLAND,
+              detail: {
+                collection: {
+                  model: CURSIST,
+                  count: 11,
+                  exclude: ['Omschrijving'],
+                  actions: [
+                    ['Inschrijven', 'arrowRight', 'primary'],
+                    ['Meer', 'threeHorizontalDots'],
+                  ]
+                }
               }
             },
             {
               type: 'Page.Detail.Collection.Table',
-              model: SESSIE,
-              collection: {
-                count: 3,
-                exclude: ['Omschrijving'],
-                actions: []
+              model: INGEPLAND,
+              detail: {
+                collection: {
+                  model: SESSIE,
+                  count: 3,
+                  exclude: ['Omschrijving'],
+                  actions: []
+                }
               }
             },
             {
               type: 'Page.Detail.Collection.Table',
-              model: FACTUURREGEL,
-              collection: {
-                exclude: ['Omschrijving'],
-                count: 8,
-                actions: []
+              model: INGEPLAND,
+              detail: {
+                collection: {
+                  model: FACTUURREGEL,
+                  exclude: ['Omschrijving'],
+                  count: 8,
+                  actions: []
+                }
               }
             }
           ]
@@ -130,11 +144,13 @@ module.exports = {
               type: 'Page.Detail.Collection.Table',
               model: DOCENT,
               title: 'Gegeven cursussen',
-              collection: {
-                model: INGEPLAND,
-                exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
-                count: 8,
-                actions: []
+              detail: {
+                collection: {
+                  model: INGEPLAND,
+                  exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
+                  count: 8,
+                  actions: []
+                }
               }
             }
           ]
@@ -151,12 +167,13 @@ module.exports = {
               type: 'Page.Detail.Collection.Table',
               model: CURSIST,
               title: 'Gevolgde Cursussen',
-              collection: {
-                model: INGEPLAND,
-                data: INGEPLAND.data,
-                exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
-                count: 3,
-                actions: []
+              detail: {
+                collection: {
+                  model: INGEPLAND,
+                  exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
+                  count: 3,
+                  actions: []
+                }
               }
             }
           ]

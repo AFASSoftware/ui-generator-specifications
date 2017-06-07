@@ -1,4 +1,7 @@
 const RUIMTE = require('./../../../models/ruimte.js')
+const SESSIE = require('./cursus-sessie.js')
+const INGEPLAND = require('./cursus-ingepland.js')
+
 
 module.exports = {
   title: 'Cursus aanbod',
@@ -23,7 +26,16 @@ module.exports = {
       sampleData: ['x..y', { min: 5, maxmin: 10, max: 25, minmax: 15, seperator: '-' }]
     },
     {
-      relation: RUIMTE
+      relation: SESSIE,
+      relationType: 'many'
+    },
+    {
+      relation: INGEPLAND,
+      relationType: 'many'
+    },
+    {
+      relation: RUIMTE,
+      relationType: 'single'
     },
     {
       title: 'Beschrijving',
