@@ -1,17 +1,29 @@
 // CLEAR MODULE CACHE
 require('require-reload')(require).emptyCache()
 
+// const {
+//   FACTUURREGEL,
+//   FACTUUR,
+//   RUIMTE,
+//   AANBOD,
+//   SESSIE,
+//   CURSIST,
+//   DOCENT,
+//   INGEPLAND
+// } = require('./../../../_models.js')
+
 // IMPORT GLOBAL MODELS
-const FACTUURREGEL = require('./../../../models/factuurregel.js')
-const FACTUUR = require('./../../../models/factuur.js')
-const RUIMTE = require('./../../../models/ruimte.js')
+const FACTUURREGEL = require('./../../../models/factuurregel.js')(true)
+const FACTUUR = require('./../../../models/factuur.js')(true)
+const RUIMTE = require('./../../../models/ruimte.js')(true)
 
 // IMPORT LOCAL MODELS
-const AANBOD = require('./../models/cursus-aanbod.js')
-const SESSIE = require('./../models/cursus-sessie.js')
-const CURSIST = require('./../models/cursus-deelnemer.js')
-const DOCENT = require('./../models/cursus-docent.js')
-const INGEPLAND = require('./../models/cursus-ingepland.js')
+// const { AANBOD, } = require('./../models')(true)
+const AANBOD = require('./../models/cursus-aanbod.js')(true)
+const SESSIE = require('./../models/cursus-sessie.js')(true)
+const CURSIST = require('./../models/cursus-deelnemer.js')(true)
+const DOCENT = require('./../models/cursus-docent.js')(true)
+const INGEPLAND = require('./../models/cursus-ingepland.js')(true)
 
 module.exports = {
   sizes: [
@@ -38,7 +50,8 @@ module.exports = {
                 actions: [
                   ['Schrijf je in', 'arrowRight', 'primary']
                 ],
-                exclude: ['Beschrijving', 'Bezetting', 'Opening inschrijving', 'Sluiting inschrijving']
+                exclude: ['Beschrijving', 'Bezetting', 'Opening inschrijving', 'Sluiting inschrijving'],
+                excludeTabs: ['Factuurregels']
               }
             },
             {

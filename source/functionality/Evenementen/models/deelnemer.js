@@ -1,21 +1,28 @@
-// IMPORT GLOBAL MODELS
-const PERSOON = require('./../../../models/persoon.js')
+module.exports = (deep) => {
 
-// IMPORT LOCAL MODELS
-const INTRODUCEE = require('./introducee.js')
+  const PERSOON = require('./../../../models/persoon.js')()
+  let model = {
+    title: 'Deelnemer',
+    titlePlural: 'Deelnemers',
+    sampleTitle: 'John Doe',
+    data: [
+      ...PERSOON.data,
+    ]
+  }
 
-module.exports = {
-  title: 'Deelnemer',
-  titlePlural: 'Deelnemers',
-  sampleTitle: 'John Doe',
-  data: [
-    ...PERSOON.data,
-    {
-      title: 'Aantal bezochte evenementen',
-      sampleData: 'integer'
-    },
-    {
-      relation: INTRODUCEE
-    }
-  ]
+  if (deep) {
+    const INTRODUCEE = require('./introducee.js')()
+    model.data = model.data.concat([
+      {
+        title: 'Aantal bezochte evenementen',
+        sampleData: 'integer'
+      },
+      {
+        relation: INTRODUCEE,
+        relationType: 'many'
+      }
+    ])
+  }
+
+  return model
 }
