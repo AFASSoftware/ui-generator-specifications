@@ -1,7 +1,7 @@
 
 module.exports = (deep) => {
 
-  const AANBOD = require('./cursus-aanbod.js')()
+  const AANBOD = require('./aanbod.js')()
   let model = {
     title: 'Ingeplande cursus',
     titlePlural: 'Ingeplande cursussen',
@@ -13,10 +13,10 @@ module.exports = (deep) => {
   }
 
   if (deep) {
-    const SESSIE = require('./cursus-sessie.js')()
-    const DOCENT = require('./cursus-docent.js')()
-    const RUIMTE = require('./../../../models/ruimte.js')()
-    const FACTUURREGEL = require('./../../../models/factuurregel.js')()
+    const SESSIE = require('./sessie.js')()
+    const DOCENT = require('./docent.js')()
+    const RUIMTE = require('./../_global/ruimte.js')()
+    const FACTUURREGEL = require('./../_global/factuurregel.js')()
     model.data = model.data.concat([
       {
         title: 'Datum',

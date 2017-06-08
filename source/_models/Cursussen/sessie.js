@@ -12,8 +12,8 @@ module.exports = (deep) => {
   }
 
   if (deep) {
-    const DOCENT = require('./cursus-docent.js')()
-    const RUIMTE = require('./../../../models/ruimte.js')()
+    const DOCENT = require('./docent.js')()
+    const RUIMTE = require('./../_global/ruimte.js')()
     model.data = model.data.concat([
       {
         title: 'Begintijd',

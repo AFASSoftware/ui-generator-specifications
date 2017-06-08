@@ -14,7 +14,7 @@ module.exports = (deep) => {
 
   if (deep) {
     // IMPORT GLOBAL MODELS
-    const LOCATIE = require('./../../../models/locatie.js')()
+    const LOCATIE = require('./../_global/locatie.js')()
 
     // IMPORT LOCAL MODELS
     const SESSIE = require('./sessie.js')()

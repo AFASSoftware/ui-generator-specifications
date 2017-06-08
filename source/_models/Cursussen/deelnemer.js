@@ -1,7 +1,7 @@
 
 module.exports = (deep) => {
 
-  const PERSOON = require('./../../../models/persoon.js')()
+  const PERSOON = require('./../_global/persoon.js')()
   let model = {
     title: 'Cursist',
     titlePlural: 'Cursisten',
@@ -12,7 +12,7 @@ module.exports = (deep) => {
   }
 
   if (deep) {
-    const INGEPLAND = require('./cursus-ingepland.js')()
+    const INGEPLAND = require('./ingepland.js')()
     model.data = model.data.concat([
       // {
       //   title: 'Aantal gevolgde cursussen',

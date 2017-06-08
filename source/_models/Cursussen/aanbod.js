@@ -13,9 +13,9 @@ module.exports = (deep) => {
   }
 
   if (deep) {
-    const RUIMTE = require('./../../../models/ruimte.js')()
-    const SESSIE = require('./cursus-sessie.js')()
-    const INGEPLAND = require('./cursus-ingepland.js')()
+    const RUIMTE = require('./../_global/ruimte.js')()
+    const SESSIE = require('./sessie.js')()
+    const INGEPLAND = require('./ingepland.js')()
     model.data = model.data.concat([
       {
         title: 'Onderwerp',

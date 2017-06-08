@@ -1,14 +1,14 @@
 // IMPORT GLOBAL MODELS
-const FACTUURREGEL = require('./../../../models/factuurregel.js')
-const FACTUUR = require('./../../../models/factuur.js')
-const RUIMTE = require('./../../../models/ruimte.js')
+const FACTUURREGEL = require('./../../_models/_global/factuurregel.js')
+const FACTUUR = require('./../../_models/_global/factuur.js')
+const RUIMTE = require('./../../_models/_global/ruimte.js')
 
 // IMPORT LOCAL MODELS
-const AANBOD = require('./../models/cursus-aanbod.js')
-const SESSIE = require('./../models/cursus-sessie.js')
-const CURSIST = require('./../models/cursus-deelnemer.js')
-const DOCENT = require('./../models/cursus-docent.js')
-const INGEPLAND = require('./../models/cursus-ingepland.js')
+const AANBOD = require('./../../_models/Cursussen/aanbod.js')
+const SESSIE = require('./../../_models/Cursussen/sessie.js')
+const CURSIST = require('./../../_models/Cursussen/deelnemer.js')
+const DOCENT = require('./../../_models/Cursussen/docent.js')
+const INGEPLAND = require('./../../_models/Cursussen/ingepland.js')
 
 module.exports = {
   type: 'collection',

@@ -1,6 +1,6 @@
 module.exports = (deep) => {
 
-  const PERSOON = require('./../../../models/persoon.js')()
+  const PERSOON = require('./../_global/persoon.js')()
   let model = {
     title: 'Deelnemer',
     titlePlural: 'Deelnemers',
