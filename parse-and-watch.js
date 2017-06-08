@@ -77,7 +77,7 @@ function make_subscription(client, watch, relative_path) {
   //       type: 'f' } ] }
   client.on('subscription', function (resp) {
     if (resp.subscription !== 'mysubscription') return
-
+    console.log('-------------------')
     resp.files.forEach(function (file) {
       // convert Int64 instance to javascript integer
       const mtime_ms = +file.mtime_ms
@@ -94,31 +94,42 @@ const read = require('fs-readdir-recursive')
 const beautify = require('json-beautify')
 const fs = require('fs')
 const mkdirp = require('mkdirp')
-
 function parseSource(resp) {
 
+  console.log('-------------------')
+  console.log('parseSource')
   // PARSE ALL FUNCTIONALITY SPECIFIATIONS
-  let files = read(__dirname+'/source/functionality').filter((file) => {
-    if ((/(roles|parts)\/.*\.js$/).test(file)) {
+  let files = read(__dirname+'/source').filter((file) => {
+    if (!(/_models/).test(file)) {
       mkdirp(__dirname+'/parsed/'+file.replace(/[^\/]+$/,''))
       return true
     }
   })
 
   files.forEach((file) => {
-    let sourcePath = './source/functionality/'+file
+    let sourcePath = __dirname+'/source/'+file
     let parts = file.split('/')
     let parsedName = parts[0]+'/'+parts[1]
     let parsePath = __dirname+'/parsed/'+file
-
-    let specification = require(sourcePath)
-    delete require.cache[require.resolve(sourcePath)]
-    delete require.cache[require.resolve(parsePath)]
-    let specificationString = beautify(specification, null, 2)
-
-    fs.writeFile(parsePath, specificationString, (err) => {
-      if (err) throw err
-      console.log('Specification parsed', parsePath)
-    })
+    // console.log(sourcePath, require.resolve(sourcePath))
+    // console.log(parsePath, require.resolve(parsePath))
+    try {
+      let specification = require(sourcePath)
+      if (require.resolve(sourcePath)) delete require.cache[require.resolve(sourcePath)]
+      // if (require.resolve(parsePath)) delete require.cache[require.resolve(parsePath)]
+      let specificationString = beautify(specification, null, 2)
+      fs.writeFile(parsePath, specificationString, (err) => {
+        if (err) throw err
+        console.log('Specification parsed', parsePath)
+      })
+    } catch (e) {
+      console.log('oh no big error')
+      console.log(e)
+    }
   })
 }
+
+process.on('uncaughtException', function (err) {
+  console.log('Caught exception: ', err)
+  console.log(err.stack)
+})
