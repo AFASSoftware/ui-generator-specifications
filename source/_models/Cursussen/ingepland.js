@@ -15,6 +15,7 @@ module.exports = (deep) => {
   if (deep) {
     const SESSIE = require('./sessie.js')()
     const DOCENT = require('./docent.js')()
+    const CURSIST = require('./deelnemer.js')()
     const RUIMTE = require('./../_global/ruimte.js')()
     const FACTUURREGEL = require('./../_global/factuurregel.js')()
     model.data = model.data.concat([
@@ -42,6 +43,10 @@ module.exports = (deep) => {
       {
         relation: RUIMTE,
         relationType: 'single'
+      },
+      {
+        relation: CURSIST,
+        relationType: 'many'
       },
       {
         relation: SESSIE,

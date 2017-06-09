@@ -2,7 +2,7 @@
 module.exports = (deep) => {
 
   let model = {
-    title: 'Cursus aanbod',
+    title: 'Cursus',
     titlePlural: 'Cursus aanbod',
     sampleTitle: 'Basiscursus HRM',
     data: [{
