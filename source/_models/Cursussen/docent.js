@@ -12,10 +12,15 @@ module.exports = (deep) => {
   }
 
   if (deep) {
+    const INGEPLAND = require('./ingepland.js')()
     model.data = model.data.concat([
       {
         title: 'Gegeven cursussen',
         sampleData: ['integer', { min: 0, max: 120 }]
+      },
+      {
+        relation: INGEPLAND,
+        relationType: 'many'
       }
     ])
   }

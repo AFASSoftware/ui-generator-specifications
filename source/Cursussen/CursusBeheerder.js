@@ -53,9 +53,10 @@ module.exports = {
           detail: {
             collection: {
               model: INGEPLAND,
+              title: INGEPLAND.titlePlural+' (aankomend)',
               exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
               count: 7,
-              switcher: ['Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie']
+              switcher: ['Alle ingeplande cursussen', 'Aankomend', 'Historie'],
             }
           }
         },
@@ -76,8 +77,9 @@ module.exports = {
       type: 'Page.Collection.Table',
       model: INGEPLAND,
       collection: {
+        title: INGEPLAND.titlePlural+' (aankomend)',
         exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
-        switcher: ['Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie'],
+        switcher: ['Alle ingeplande cursussen', 'Aankomend', 'Historie'],
       },
       pages: [
         {
@@ -118,7 +120,7 @@ module.exports = {
             collection: {
               model: FACTUURREGEL,
               exclude: ['Omschrijving'],
-              count: 8,
+              count: 15,
               actions: []
             }
           }
@@ -139,12 +141,12 @@ module.exports = {
         {
           type: 'Page.Detail.Collection.Table',
           model: DOCENT,
-          title: 'Gegeven cursussen',
           detail: {
+            title: 'Gegeven cursussen',
             collection: {
               model: INGEPLAND,
               exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
-              count: 8,
+              count: 4,
               actions: []
             }
           }
@@ -162,8 +164,8 @@ module.exports = {
         {
           type: 'Page.Detail.Collection.Table',
           model: CURSIST,
-          title: 'Gevolgde Cursussen',
           detail: {
+            title: 'Gevolgde Cursussen',
             collection: {
               model: INGEPLAND,
               exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
