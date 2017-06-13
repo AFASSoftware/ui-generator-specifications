@@ -32,80 +32,68 @@ module.exports = {
   ],
   pages: [
     {
-      type: 'Page.Portal',
-      model: { title: 'Cursussen' },
+      type: 'Page.Collection.Table',
+      model: INGEPLAND,
+      collection: {
+        exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
+        actions: []
+      },
       pages: [
         {
-          type: 'Page.Collection.Table',
+          type: 'Page.Detail',
           model: INGEPLAND,
-          collection: {
-            exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving'],
-            actions: []
+          detail: {
+            actions: [
+              ['Schrijf je in', 'arrowRight', 'primary']
+            ],
+            exclude: ['Beschrijving', 'Bezetting', 'Opening inschrijving', 'Sluiting inschrijving'],
+            excludeTabs: ['Factuurregels']
+          }
+        },
+        {
+          type: 'Page.Detail.Collection.Table',
+          model: INGEPLAND,
+          detail: {
+            collection: {
+              model: SESSIE,
+              exclude: ['Omschrijving'],
+              count: 2,
+              actions: []
+            }
           },
           pages: [
             {
               type: 'Page.Detail',
-              model: INGEPLAND,
+              model: SESSIE,
               detail: {
-                actions: [
-                  ['Schrijf je in', 'arrowRight', 'primary']
-                ],
-                exclude: ['Beschrijving', 'Bezetting', 'Opening inschrijving', 'Sluiting inschrijving'],
-                excludeTabs: ['Factuurregels']
+                exclude: ['Omschrijving'],
+                actions: [],
+                count: 2
               }
-            },
-            {
-              type: 'Page.Detail.Collection.Table',
-              model: INGEPLAND,
-              detail: {
-                collection: {
-                  model: SESSIE,
-                  exclude: ['Omschrijving'],
-                  count: 2,
-                  actions: []
-                }
-              },
-              pages: [
-                {
-                  type: 'Page.Detail',
-                  model: SESSIE,
-                  detail: {
-                    exclude: ['Omschrijving'],
-                    actions: [],
-                    count: 2
-                  }
-                }
-              ]
             }
           ]
-        },
+        }
       ]
     },
     {
-      type: 'Page.Portal',
-      model: { title: '_' },
+      type: 'Page.Collection',
+      model: CURSIST,
       pages: [
         {
-          type: 'Page.Collection',
+          type: 'Page.Detail',
+          model: CURSIST
+        },
+        {
+          type: 'Page.Detail.Collection.Table',
           model: CURSIST,
-          pages: [
-            {
-              type: 'Page.Detail',
-              model: CURSIST
-            },
-            {
-              type: 'Page.Detail.Collection.Table',
-              model: CURSIST,
-              title: 'Gevolgde Cursussen',
-              detail: {
-                collection: {
-                  model: INGEPLAND,
-                  exclude: ['Beschrijving', 'Bezetting', 'Opening inschrijving', 'Sluiting inschrijving'],
-                  count: 4
-                }
-              }
+          title: 'Gevolgde Cursussen',
+          detail: {
+            collection: {
+              model: INGEPLAND,
+              exclude: ['Beschrijving', 'Bezetting', 'Opening inschrijving', 'Sluiting inschrijving'],
+              count: 4
             }
-          ]
+          }
         }
       ]
     }

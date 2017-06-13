@@ -19,155 +19,150 @@ module.exports = {
     // [375, 667]
   ],
   pages: [
+
     {
-      type: 'Page.Portal',
-      model: { title: 'Cursussen' },
+      type: 'Page.Collection',
+      model: INGEPLAND,
+      collection: {
+        exclude: ['Beschrijving'],
+        switcher: ['Mijn ingeplande cursussen', 'Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie'],
+        actions: []
+      },
       pages: [
         {
-          type: 'Page.Collection',
+          type: 'Page.Detail',
+          model: INGEPLAND
+        },
+        {
+          type: 'Page.Detail.Collection',
           model: INGEPLAND,
-          collection: {
-            exclude: ['Beschrijving'],
-            switcher: ['Mijn ingeplande cursussen', 'Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie'],
-            actions: []
-          },
-          pages: [
-            {
-              type: 'Page.Detail',
-              model: INGEPLAND
-            },
-            {
-              type: 'Page.Detail.Collection',
-              model: INGEPLAND,
-              detail: {
-                collection: {
-                  model: CURSIST,
-                  count: 11,
-                  exclude: ['Omschrijving'],
-                  actions: []
-                }
-              }
-            },
-            {
-              type: 'Page.Detail.Collection',
-              model: INGEPLAND,
-              detail: {
-                collection: {
-                  model: SESSIE,
-                  count: 3,
-                  exclude: ['Omschrijving'],
-                  actions: []
-                }
-              }
+          detail: {
+            collection: {
+              model: CURSIST,
+              count: 11,
+              exclude: ['Omschrijving'],
+              actions: []
             }
-          ]
+          }
         },
         {
-          type: 'Page.Collection',
+          type: 'Page.Detail.Collection',
+          model: INGEPLAND,
+          detail: {
+            collection: {
+              model: SESSIE,
+              count: 3,
+              exclude: ['Omschrijving'],
+              actions: []
+            }
+          }
+        }
+      ]
+    },
+    {
+      type: 'Page.Collection',
+      model: AANBOD,
+      collection: {
+        exclude: ['Beschrijving'],
+        actions: []
+      },
+      pages: [
+        {
+          type: 'Page.Detail',
+          model: AANBOD
+        },
+        {
+          type: 'Page.Detail.Collection',
           model: AANBOD,
-          collection: {
-            exclude: ['Beschrijving'],
-            actions: []
-          },
-          pages: [
-            {
-              type: 'Page.Detail',
-              model: AANBOD
-            },
-            {
-              type: 'Page.Detail.Collection',
-              model: AANBOD,
-              detail: {
-                collection: {
-                  model: SESSIE,
-                  exclude: ['Omschrijving'],
-                  count: 2,
-                  actions: []
-                }
-              },
-              pages: [
-                {
-                  type: 'Page.Detail',
-                  model: SESSIE,
-                  detail: {
-                    exclude: ['Docent'],
-                    actions: []
-                  }
-                }
-              ]
-            },
-            {
-              type: 'Page.Detail.Collection.Table',
-              model: AANBOD,
-              detail: {
-                collection: {
-                  model: INGEPLAND,
-                  count: 7,
-                  exclude: ['Beschrijving'],
-                  switcher: ['Mijn ingeplande cursussen', 'Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie'],
-                  actions: []
-                }
-              }
+          detail: {
+            collection: {
+              model: SESSIE,
+              exclude: ['Omschrijving'],
+              count: 2,
+              actions: []
             }
-          ]
-        },
-        {
-          type: 'Page.Collection',
-          model: DOCENT,
-          collection: {
-            actions: []
           },
           pages: [
             {
               type: 'Page.Detail',
-              model: DOCENT,
+              model: SESSIE,
               detail: {
+                exclude: ['Docent'],
                 actions: []
               }
-            },
-            {
-              type: 'Page.Detail.Collection.Table',
-              model: DOCENT,
-              title: 'Gegeven cursussen',
-              detail: {
-                collection: {
-                  model: INGEPLAND,
-                  exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving', 'Docent', 'Bezetting'],
-                  count: 8,
-                  actions: []
-                }
-              }
             }
           ]
         },
         {
-          type: 'Page.Collection',
+          type: 'Page.Detail.Collection.Table',
+          model: AANBOD,
+          detail: {
+            collection: {
+              model: INGEPLAND,
+              count: 7,
+              exclude: ['Beschrijving'],
+              switcher: ['Mijn ingeplande cursussen', 'Alle ingeplande cursussen', 'Deze week', 'Deze Maand', 'Historie'],
+              actions: []
+            }
+          }
+        }
+      ]
+    },
+    {
+      type: 'Page.Collection',
+      model: DOCENT,
+      collection: {
+        actions: []
+      },
+      pages: [
+        {
+          type: 'Page.Detail',
+          model: DOCENT,
+          detail: {
+            actions: []
+          }
+        },
+        {
+          type: 'Page.Detail.Collection.Table',
+          model: DOCENT,
+          title: 'Gegeven cursussen',
+          detail: {
+            collection: {
+              model: INGEPLAND,
+              exclude: ['Beschrijving', 'Opening inschrijving', 'Sluiting inschrijving', 'Docent', 'Bezetting'],
+              count: 8,
+              actions: []
+            }
+          }
+        }
+      ]
+    },
+    {
+      type: 'Page.Collection',
+      model: CURSIST,
+      collection: {
+        actions: []
+      },
+      pages: [
+        {
+          type: 'Page.Detail',
           model: CURSIST,
           collection: {
-            actions: []
-          },
-          pages: [
-            {
-              type: 'Page.Detail',
-              model: CURSIST,
-              collection: {
-                actions: [],
-              }
-            },
-            {
-              type: 'Page.Detail.Collection.Table',
-              model: CURSIST,
-              title: 'Gevolgde cursussen',
-              detail: {
-                collection: {
-                  model: INGEPLAND,
-                  exclude: ['Beschrijving'],
-                  count: 3,
-                  actions: []
-                }
-              }
+            actions: [],
+          }
+        },
+        {
+          type: 'Page.Detail.Collection.Table',
+          model: CURSIST,
+          title: 'Gevolgde cursussen',
+          detail: {
+            collection: {
+              model: INGEPLAND,
+              exclude: ['Beschrijving'],
+              count: 3,
+              actions: []
             }
-          ]
+          }
         }
       ]
     }
