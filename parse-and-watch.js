@@ -116,12 +116,38 @@ function parseSource(resp) {
     try {
       let specification = require(sourcePath)
       if (require.resolve(sourcePath)) delete require.cache[require.resolve(sourcePath)]
-      // if (require.resolve(parsePath)) delete require.cache[require.resolve(parsePath)]
       let specificationString = beautify(specification, null, 2)
       fs.writeFile(parsePath, specificationString, (err) => {
         if (err) throw err
         console.log('Specification parsed', parsePath)
       })
+
+
+      /*
+       TEST IF PAGE ID CAN BE AUTO ADDED TO SOURCE, ON SOURCE SAVE
+      let autoNumberPages = (pages, number) => {
+        if(!pages) return
+        if (!number) number = ''
+        else number += '.'
+        pages.forEach((page, i) => {
+          // let innernumber = number + (i + 1)
+          let innernumber = number + '/detail/'(i + 1)
+          page.id = innernumber
+          console.log(innernumber)
+          if (page.pages) {
+            autoNumberPages(page.pages, innernumber)
+          }
+        })
+      }
+      let json = JSON.parse(specificationString)
+      autoNumberPages(json.pages)
+      let jsonStringNumbered = beautify(json, null, 2)
+      fs.writeFile(parsePath+'.js', jsonStringNumbered, (err) => {
+        if (err) throw err
+        console.log('Specification parsed', parsePath)
+      })
+      */
+
     } catch (e) {
       console.log('oh no big error')
       console.log(e)
