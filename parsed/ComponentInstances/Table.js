@@ -1,0 +1,1 @@
+"const ORGANISATIE = require('./source/_models/_global/organisatie.js')(true)\nmodule.exports = {\n  type: 'Collection.Table',\n  model: ORGANISATIE,\n  collection: {\n    switcher: ['Alle ingeplande cursussen', 'Aankomend', 'Historie']\n  }\n}\n"

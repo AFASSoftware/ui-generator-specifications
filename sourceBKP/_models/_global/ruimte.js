@@ -2,12 +2,12 @@
 module.exports = (deep) => {
 
   let model = {
-    title: 'Locatie',
-    titlePlural: 'Locaties',
-    sampleTitle: 'AFAS Live',
+    title: 'Ruimte',
+    titlePlural: 'Ruimtes',
+    sampleTitle: 'Wattzaal 2.04',
     data: [{
       title: 'Naam',
-      sampleData: '_locatie'
+      sampleData: '_location_space'
     }]
   }
 
@@ -19,5 +19,6 @@ module.exports = (deep) => {
       }
     ])
   }
+
   return model
 }

@@ -1,6 +1,4 @@
-
-module.exports = (deep) => {
-
+export default (deep) => {
   let model = {
     title: 'Organisatie',
     titlePlural: 'Organisaties',
@@ -12,7 +10,9 @@ module.exports = (deep) => {
   }
 
   if (deep) {
-    const PERSOON = require('./persoon.js')()
+    import PERSOON_ from './persoon.js'
+    const PERSOON = PERSOON_()
+    // const PERSOON = require('./persoon.js')()
     model.data = model.data.concat([
       {
         title: 'Adres',
@@ -24,7 +24,7 @@ module.exports = (deep) => {
       },
       {
         title: 'Contactpersoon',
-        relation: PERSOON,
+        relation: persoon,
         relationType: 'single'
       }
     ])

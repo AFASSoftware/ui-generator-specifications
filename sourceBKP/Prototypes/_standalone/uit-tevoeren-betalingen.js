@@ -16,7 +16,7 @@ module.exports = {
         },
         {
           title: 'Crediteur',
-          sampleData: '_organisation'
+          sampleData: '_organisatie'
         },
         {
           title: 'Bron',

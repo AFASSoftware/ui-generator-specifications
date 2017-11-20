@@ -1,4 +1,5 @@
 const watchman = require('fb-watchman')
+const flowRemoveTypes = require('flow-remove-types')
 
 const client = new watchman.Client()
 const dir_of_interest = __dirname + '/source'
@@ -31,8 +32,7 @@ client.capabilityCheck({optional:[], required:['relative_root']},
         // tree, so it is very important to record the `relative_path`
         // returned in resp
 
-        console.log('watch established on ', resp.watch,
-                    ' relative_path', resp.relative_path)
+        console.log('watch established on ', resp.watch, ' relative_path', resp.relative_path)
         make_subscription(client, resp.watch, resp.relative_path)
       }
     )
@@ -114,13 +114,36 @@ function parseSource(resp) {
     // console.log(sourcePath, require.resolve(sourcePath))
     // console.log(parsePath, require.resolve(parsePath))
     try {
-      let specification = require(sourcePath)
-      if (require.resolve(sourcePath)) delete require.cache[require.resolve(sourcePath)]
-      let specificationString = beautify(specification, null, 2)
-      fs.writeFile(parsePath, specificationString, (err) => {
-        if (err) throw err
-        console.log('Specification parsed', parsePath)
-      })
+      let specification
+      const debug = true
+      if (debug || (/detailpage/i).test(file)) {
+        // specification = require(sourcePath)
+        // require.resolve(sourcePath)
+        specification = fs.readFileSync(sourcePath, 'utf8');
+        // console.log('1', sourcePath);
+        // console.log('2', specification)
+        if (!specification||specification == {}) return
+        specification = flowRemoveTypes(specification).toString()
+        specification = specification.replace(/(\.\/\.\.\/_models|\.\/_models)/g, './source/_models')
+        // specification = babel.transformFileSync(sourcePath, {
+        // plugins: ['transform-flow-strip-types', 'syntax-dynamic-import', 'syntax-flow']
+        // presets: ['env'],
+        // plugins: ['syntax-flow', 'transform-flow-strip-types']//'inline-script-import'
+        // }).code
+        // console.log('unflowed', specification)
+        specification = eval(specification + ' specification')
+        // console.log('eval’ed', specification)
+        let specificationString = beautify(specification, null, 2)
+        // console.log('beautified', specificationString)
+        fs.writeFile(parsePath, specificationString, (err) => {
+          if (err) throw err
+          console.log('Specification parsed', parsePath)
+        })
+
+      } else {
+        // specification = require(sourcePath)
+      }
+      // if (require.resolve(sourcePath)) delete require.cache[require.resolve(sourcePath)]
 
 
       /*

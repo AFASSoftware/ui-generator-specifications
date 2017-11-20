@@ -20,6 +20,9 @@ env:
   node: true
 extends:
 - eslint:recommended
+- plugin:flowtype/recommended
+plugins:
+- flowtype
 globals:
   NEXT: true
   LIB: true

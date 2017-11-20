@@ -2,14 +2,14 @@
 require('require-reload')(require).emptyCache()
 
 // IMPORT GLOBAL MODELS
-const LOCATIE = require('./../_models/_global/locatie.js')(true)
+const LOCATIE = require('./../../_models/_global/locatie.js')(true)
 
 // IMPORT LOCAL MODELS
-const EVENEMENT = require('./../_models/Evenementen/evenement.js')(true)
-const DECLARATIE = require('./../_models/Evenementen/declaratie.js')(true)
-const SESSIE = require('./../_models/Evenementen/sessie.js')(true)
-const DEELNEMER = require('./../_models/Evenementen/deelnemer.js')(true)
-const CREWLID = require('./../_models/Evenementen/crewlid.js')(true)
+const EVENEMENT = require('./../../_models/Evenementen/evenement.js')(true)
+const DECLARATIE = require('./../../_models/Evenementen/declaratie.js')(true)
+const SESSIE = require('./../../_models/Evenementen/sessie.js')(true)
+const DEELNEMER = require('./../../_models/Evenementen/deelnemer.js')(true)
+const CREWLID = require('./../../_models/Evenementen/crewlid.js')(true)
 
 module.exports = {
   sizes: [
