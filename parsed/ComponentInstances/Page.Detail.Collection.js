@@ -47,13 +47,11 @@
       ]
     },
     "Detail": {
-      "actions": [
-        [
-          "plus",
-          "text",
-          "primary"
-        ]
-      ]
+      "process": "leveren",
+      "Collection": {
+        "mode": "new",
+        "process": "Inpakken"
+      }
     }
   }
 }
